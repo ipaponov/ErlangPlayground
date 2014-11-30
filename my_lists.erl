@@ -1,5 +1,7 @@
--module(p1_01).
--export([last_in_list/1]).
+-module(my_lists).
+-export([
+    last_in_list/1
+]).
 
 %% Problem
 %% 1.01 (*) Find the last element of a list.
