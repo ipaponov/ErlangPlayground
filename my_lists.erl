@@ -5,7 +5,8 @@
     find_k_th/2,
     list_length/1,
     reverse_list_tail/1,
-    reverse_list/1
+    reverse_list/1,
+    palindrome/1
 ]).
 
 %% Problem
@@ -63,3 +64,19 @@ reverse_list([]) ->
     [];
 reverse_list([H|T]) ->
     reverse_list(T)++[H].
+
+%% Problem
+%% 1.06 (*) Find out whether a list is a palindrome.
+
+palindrome(List) ->
+    ReverseList = reverse_list(List),
+    compare_lists(List, ReverseList).
+
+compare_lists([], []) ->
+    true;
+
+compare_lists([H1|List], [H2|ReverseList]) ->
+    case H1 of
+        H2 -> compare_lists(List, ReverseList);
+        _  -> false
+    end.
