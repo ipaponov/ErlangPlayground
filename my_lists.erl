@@ -7,7 +7,8 @@
     reverse_list_tail/1,
     reverse_list/1,
     palindrome/1,
-    flatten/1
+    flatten/1,
+    consecutive_duplicates/1
 ]).
 
 %% Problem
@@ -97,3 +98,18 @@ flatten_acc([H|List], FlatList) when is_list(H) ->
 flatten_acc([H|List], FlatList) ->
     flatten_acc(List, FlatList++[H]).
 
+
+%% Problem
+%% 1.08 (**) Eliminate consecutive duplicates of list elements.
+
+consecutive_duplicates([H|List]) ->
+    consecutive_duplicates_acc(List, [H], H).
+
+consecutive_duplicates_acc([], Deduped, _) ->
+    Deduped;
+
+consecutive_duplicates_acc([H1|Tail], Deduped, Prev) ->
+    case H1 of
+        Prev -> consecutive_duplicates_acc(Tail, Deduped, H1);
+        _ -> consecutive_duplicates_acc(Tail, Deduped++[H1], H1)
+    end.
