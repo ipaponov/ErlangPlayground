@@ -6,7 +6,8 @@
     list_length/1,
     reverse_list_tail/1,
     reverse_list/1,
-    palindrome/1
+    palindrome/1,
+    flatten/1
 ]).
 
 %% Problem
@@ -80,3 +81,19 @@ compare_lists([H1|List], [H2|ReverseList]) ->
         H2 -> compare_lists(List, ReverseList);
         _  -> false
     end.
+
+%% Problem
+%% 1.07 (**) Flatten a nested list structure.
+
+flatten(List) ->
+    flatten_acc(List, []).
+
+flatten_acc([], FlatList) ->
+    FlatList;
+
+flatten_acc([H|List], FlatList) when is_list(H) ->
+    flatten_acc(H++List, FlatList);
+
+flatten_acc([H|List], FlatList) ->
+    flatten_acc(List, FlatList++[H]).
+
