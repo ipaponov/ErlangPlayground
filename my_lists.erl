@@ -2,7 +2,10 @@
 -export([
     last_in_list/1,
     last_but_one/1,
-    find_k_th/2
+    find_k_th/2,
+    list_length/1,
+    reverse_list_tail/1,
+    reverse_list/1
 ]).
 
 %% Problem
@@ -31,3 +34,32 @@ find_k_th([H|T], K) ->
         1 -> H;
         _ -> find_k_th(T, K-1)
     end.
+
+%% Problem
+%% 1.04 (*) Find the number of elements of a list.
+
+list_length([_|List]) ->
+    list_length(List, 1).
+
+list_length([_|[]], Length) ->
+    Length+1;
+
+list_length([_|List],Length) ->
+    list_length(List, Length+1).
+
+%% Problem
+%% 1.05 (*) Reverse a list.
+
+reverse_list_tail(List) ->
+    reverse_list(List, []).
+reverse_list([], ReverseList) ->
+    ReverseList;
+reverse_list([H|T], ReverseList) ->
+    reverse_list(T, [H|ReverseList]).
+
+%% variant #2
+
+reverse_list([]) ->
+    [];
+reverse_list([H|T]) ->
+    reverse_list(T)++[H].
