@@ -8,7 +8,8 @@
     reverse_list/1,
     palindrome/1,
     flatten/1,
-    consecutive_duplicates/1
+    consecutive_duplicates/1,
+    pack/1
 ]).
 
 %% Problem
@@ -113,3 +114,18 @@ consecutive_duplicates_acc([H1|Tail], Deduped, Prev) ->
         Prev -> consecutive_duplicates_acc(Tail, Deduped, H1);
         _ -> consecutive_duplicates_acc(Tail, Deduped++[H1], H1)
     end.
+
+%% Problem
+%% 1.09 (**) Pack consecutive duplicates of list elements into sublists.
+
+pack([H|List]) ->
+    pack_acc(List, [], [H], H).
+
+pack_acc([], Packed, PrevList, _) ->
+    Packed++[PrevList];
+
+pack_acc([H|List], Packed, PrevList, PrevItem) when PrevItem =:= H ->
+    pack_acc(List, Packed, PrevList++[H], H);
+
+pack_acc([H|List], Packed, PrevList, PrevItem) when PrevItem =/= H ->
+    pack_acc(List, Packed++[PrevList], [H], H).
